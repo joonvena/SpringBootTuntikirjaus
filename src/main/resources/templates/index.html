@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tuntikirjaus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="hours" class="btn btn-info" role="button" style="margin: 10px 0px 10px 0px">Kirjaa tunteja</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Etunimi</th>
+            <th>Sukunimi</th>
+            <th>Osasto ID</th>
+            <th>Tehtavanimike ID</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="p : ${showusers}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.etunimi}"></td>
+        <td th:text="${p.sukunimi}"></td>
+        <td th:text="${p.osastoid}"></td>
+        <td th:text="${p.tehtavanimikeid}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Käyttäjä ID</th>
+            <th>Päivämäärä</th>
+            <th>Minuutit</th>
+            <th>Tehtäväkuvaus</th>
+            <th>Laskutettava</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="p : ${showhours}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.kayttajaid}"></td>
+            <td th:text="${p.paivamaara}"></td>
+            <td th:text="${p.minuutit}"></td>
+            <td th:text="${p.tehtavakuvaus}"></td>
+            <td th:text="${p.laskutettava}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
