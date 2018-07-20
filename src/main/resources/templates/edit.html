@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tuntikirjaus</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Tuntikirjaus v.0.1</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="home">Etusivu</a></li>
+            <li><a href="hours">Kirjaa tunteja</a></li>
+            <li><a href="registration">Rekisteröidy</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="form-group" style="margin-top: 100px;">
+        <form action="" th:action="@{/hours}" th:object="${showhours}" method="post">
+
+            <input type="hidden" class="form-control" th:id="kayttajaid" th:name="kayttajaid" th:value="${#authentication.name}" />
+            <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}" /></p>
+            <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}" /></p>
+            <p>Tehtäväkuvaus: <input type="text" class="form-control" th:field="*{tehtavakuvaus}" /></p>
+            <p>Laskutettava:<br /> <input type="checkbox" th:field="*{laskutettava}" /></p>
+            <p><input type="submit" value="Submit" class="btn btn-info" /> <input type="reset" value="Reset" class="btn btn-danger" /></p>
+        </form>
+    </div>
+
+</div>
+</body>
+
+</html>
