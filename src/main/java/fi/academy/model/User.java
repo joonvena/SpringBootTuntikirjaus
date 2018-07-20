@@ -1,35 +1,52 @@
 package fi.academy.model;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "kayttajat")
+@Table(name = "user")
 public class User {
 
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     private Integer id;
 
-    @Column(name = "etunimi")
-    private String etunimi;
+    @Column(name ="email")
+    @NotEmpty(message = "*Syötä sähköposti")
+    private String email;
 
-    @Column(name = "sukunimi")
-    private String sukunimi;
+    @Column(name = "name")
+    @NotEmpty(message = "*Syötä etunimesi")
+    private String name;
 
-    @Column(name = "osastoid")
-    private Integer osastoid;
 
-    @Column(name = "tehtavanimikeid")
-    private Integer tehtavanimikeid;
+    @Column(name = "last_name")
+    @NotEmpty(message = "*Syötä sukunimesi")
+    private String lastName;
 
-    public User(Integer id, String etunimi, String sukunimi, Integer osastoid, Integer tehtavanimikeid) {
-        this.id = id;
-        this.etunimi = etunimi;
-        this.sukunimi = sukunimi;
-        this.osastoid = osastoid;
-        this.tehtavanimikeid = tehtavanimikeid;
+
+    @Column(name = "password")
+    @NotEmpty(message = "*Syötä salasana käyttäjätilillesi")
+    private String password;
+
+    @Column(name = "active")
+    private boolean active;
+
+
+    public User(@NotEmpty(message = "*Syötä sähköpostisi") String email, @NotEmpty(message = "*Syötä sukunimesi") String lastName, @NotEmpty(message = "*Syötä etunimesi") String name, @NotEmpty(message = "*Syötä salasana käyttäjätilillesi") String password) {
+        this.email = email;
+        this.lastName = lastName;
+        this.name = name;
+        this.password = password;
     }
+
 
     public User() {}
 
@@ -41,46 +58,56 @@ public class User {
         this.id = id;
     }
 
-    public String getEtunimi() {
-        return etunimi;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEtunimi(String etunimi) {
-        this.etunimi = etunimi;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getSukunimi() {
-        return sukunimi;
+    public String getName() {
+        return name;
     }
 
-    public void setSukunimi(String sukunimi) {
-        this.sukunimi = sukunimi;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getOsastoid() {
-        return osastoid;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setOsastoid(Integer osastoid) {
-        this.osastoid = osastoid;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Integer getTehtavanimikeid() {
-        return tehtavanimikeid;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTehtavanimikeid(Integer tehtavanimikeid) {
-        this.tehtavanimikeid = tehtavanimikeid;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("id=").append(id);
-        sb.append(", etunimi='").append(etunimi).append('\'');
-        sb.append(", sukunimi='").append(sukunimi).append('\'');
-        sb.append(", osastoid=").append(osastoid);
-        sb.append(", tehtavanimikeid=").append(tehtavanimikeid);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", active=").append(active);
         sb.append('}');
         return sb.toString();
     }

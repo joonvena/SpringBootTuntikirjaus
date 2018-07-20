@@ -1,10 +1,14 @@
 package fi.academy.model;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 
 @Entity
 @Table (name = "tuntienkirjaus")
+@EntityListeners(AuditingEntityListener.class)
 public class Hours {
 
     @Id
@@ -13,7 +17,7 @@ public class Hours {
     private Integer id;
 
     @Column(name = "kayttajaid")
-    private Integer kayttajaid;
+    private String kayttajaid;
 
     @Column(name = "laskutettava")
     private boolean laskutettava;
@@ -29,7 +33,8 @@ public class Hours {
 
     public Hours() {}
 
-    public Hours(Integer kayttajaid, boolean laskutettava, Integer minuutit, Date paivamaara, String tehtavakuvaus) {
+    public Hours(Integer id, String kayttajaid, boolean laskutettava, Integer minuutit, Date paivamaara, String tehtavakuvaus) {
+        this.id = id;
         this.kayttajaid = kayttajaid;
         this.laskutettava = laskutettava;
         this.minuutit = minuutit;
@@ -45,11 +50,11 @@ public class Hours {
         this.id = id;
     }
 
-    public Integer getKayttajaid() {
+    public String getKayttajaid() {
         return kayttajaid;
     }
 
-    public void setKayttajaid(Integer kayttajaid) {
+    public void setKayttajaid(String kayttajaid) {
         this.kayttajaid = kayttajaid;
     }
 

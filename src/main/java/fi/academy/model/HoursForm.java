@@ -3,6 +3,7 @@ package fi.academy.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -12,31 +13,27 @@ public class HoursForm {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Integer id;
 
-        @NotNull
-        private Integer kayttajaid;
+        private String kayttajaid;
 
         private boolean laskutettava;
 
-        @NotNull
         private Integer minuutit;
 
-        @NotNull
         private Date paivamaara;
 
-        @NotNull
         private String tehtavakuvaus;
 
         public HoursForm() {}
 
-        public HoursForm(Integer kayttajaid, boolean laskutettava, Integer minuutit, Date paivamaara, String tehtavakuvaus) {
-            this.kayttajaid = kayttajaid;
-            this.laskutettava = laskutettava;
-            this.minuutit = minuutit;
-            this.paivamaara = paivamaara;
-            this.tehtavakuvaus = tehtavakuvaus;
-        }
+    public HoursForm(String kayttajaid, boolean laskutettava, Integer minuutit, Date paivamaara, String tehtavakuvaus) {
+        this.kayttajaid = kayttajaid;
+        this.laskutettava = laskutettava;
+        this.minuutit = minuutit;
+        this.paivamaara = paivamaara;
+        this.tehtavakuvaus = tehtavakuvaus;
+    }
 
-        public Integer getId() {
+    public Integer getId() {
             return id;
         }
 
@@ -44,11 +41,11 @@ public class HoursForm {
             this.id = id;
         }
 
-        public Integer getKayttajaid() {
+        public String getKayttajaid() {
             return kayttajaid;
         }
 
-        public void setKayttajaid(Integer kayttajaid) {
+        public void setKayttajaid(String kayttajaid) {
             this.kayttajaid = kayttajaid;
         }
 

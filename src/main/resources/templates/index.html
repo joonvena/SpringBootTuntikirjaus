@@ -1,43 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Tuntikirjaus</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Tuntikirjaus v.0.1</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="home">Etusivu</a></li>
+        <li><a href="hours">Kirjaa tunteja</a></li>
+        <li><a href="registration">Rekisteröidy </a></li>
+        <li><a href="#">Käyttäjä: [[${#httpServletRequest.remoteUser}]]</a> </li>
+        <li><form th:action="@{/logout}" method="POST"><input type="submit" class="btn btn-primary" style="margin-top: 7px; margin-right: 5px;" value="Kirjaudu ulos" /></form> </li>
+    </ul>
+</div>
+</nav>
 <div class="container">
 
-    <a href="hours" class="btn btn-info" role="button" style="margin: 10px 0px 10px 0px">Kirjaa tunteja</a>
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Etunimi</th>
-            <th>Sukunimi</th>
-            <th>Osasto ID</th>
-            <th>Tehtavanimike ID</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr th:each="p : ${showusers}">
-        <td th:text="${p.id}"></td>
-        <td th:text="${p.etunimi}"></td>
-        <td th:text="${p.sukunimi}"></td>
-        <td th:text="${p.osastoid}"></td>
-        <td th:text="${p.tehtavanimikeid}"></td>
-        </tr>
-        </tbody>
-    </table>
 
     <table class="table table-striped">
         <thead>
@@ -52,15 +46,19 @@
         </thead>
         <tbody>
 
-        <tr th:each="p : ${showhours}">
+        <tr th:each="p : ${showhours}" th:if="${p.kayttajaid == #authentication.name}">
             <td th:text="${p.id}"></td>
             <td th:text="${p.kayttajaid}"></td>
-            <td th:text="${p.paivamaara}"></td>
+            <td th:text="${#calendars.format(p.paivamaara, 'dd/MM/yyyy')}"></td>
             <td th:text="${p.minuutit}"></td>
             <td th:text="${p.tehtavakuvaus}"></td>
             <td th:text="${p.laskutettava}"></td>
+            <td><a href="#" th:href="@{/edit/{id}/(id=${p.id})}">Muokkaa</a> </td>
+            <td><a href="#" th:href="@{/delete/{id}/(id=${p.id})}">Poista</a></td>
         </tr>
         </tbody>
+        <tbody>
+
     </table>
 </div>
 </body>

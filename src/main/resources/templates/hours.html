@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Tuntikirjaus</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
 
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Tuntikirjaus v.0.1</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="home">Etusivu</a></li>
+            <li><a href="hours">Kirjaa tunteja</a></li>
+            <li><a href="registration">Rekisteröidy</a></li>
+        </ul>
+    </div>
+</nav>
 <div class="container">
 
-   <div class="form-group" style="margin-top: 100px;">
-    <form action="#" th:action="@{/hours}" th:object="${hours}" method="post">
-        <p>Käyttäjä ID: <input type="text" class="form-control" th:field="*{kayttajaid}" /></p>
-        <td th:if="${#fields.hasErrors('kayttajaid')}" th:errors="*{kayttajaid}">Virheellinen käyttäjä id.</td>
-        <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}" /></p>
-        <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}" /></p>
-        <p>Tehtäväkuvaus: <input type="text" class="form-control" th:field="*{tehtavakuvaus}" /></p>
-        <p>Laskutettava:<br /> <input type="checkbox" th:field="*{laskutettava}" /></p>
-        <p><input type="submit" value="Submit" class="btn btn-info" /> <input type="reset" value="Reset" class="btn btn-danger" /></p>
-    </form>
-   </div>
+
+    <div class="form-group" style="margin-top: 100px;">
+        <form action="#" th:action="@{/hours}" th:object="${hours}" method="post">
+
+            <input type="hidden" class="form-control" th:id="kayttajaid" th:name="kayttajaid"
+                   th:value="${#authentication.name}"/>
+
+            <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}"/></p>
+
+            <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}"/></p>
+
+            <p>Tehtäväkuvaus: <input type="text" class="form-control" th:field="*{tehtavakuvaus}"/></p>
+            <p>Laskutettava:<br/> <input type="checkbox" th:field="*{laskutettava}"/></p>
+            <p><input type="submit" value="Lähetä" class="btn btn-info"/> <input type="reset" value="Tyhjennä"
+                                                                                 class="btn btn-danger"/></p>
+            <input type="hidden" th:field="*{id}"/>
+        </form>
+    </div>
 
 </div>
 </body>
