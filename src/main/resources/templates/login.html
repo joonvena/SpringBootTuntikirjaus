@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Tuntikirjaus</title>
@@ -23,13 +23,14 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="home">Etusivu</a></li>
+            <div sec:authorize="isAuthenticated()">
             <li><a href="hours">Kirjaa tunteja</a></li>
+            </div>
             <li><a href="registration">Rekisteröidy</a></li>
         </ul>
     </div>
 </nav>
 <div class="container">
-
 
     <form th:action="@{/login}" method="POST" class="form-signin">
         <h3>Kirjaudu sisään</h3>

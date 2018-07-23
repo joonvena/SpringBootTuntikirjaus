@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +39,9 @@ public class UserController {
 
     @Autowired
     HoursService hoursService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @GetMapping("/home")
     public String index(Model model) {
@@ -90,7 +95,8 @@ public class UserController {
         String lastname = user.getLastName();
         String email = user.getEmail();
         String password = user.getPassword();
-        userRepository.save(new User(email, lastname, name, password));
+        String encodePassword = passwordEncoder.encode(user.getPassword());
+        userRepository.save(new User(email, lastname, name, encodePassword));
         return "redirect:/home";
     }
 

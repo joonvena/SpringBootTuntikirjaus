@@ -23,7 +23,9 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="home">Etusivu</a></li>
             <li><a href="hours">Kirjaa tunteja</a></li>
+            <div sec:authorize="!isAuthenticated()">
             <li><a href="registration">Rekisteröidy</a></li>
+            </div>
         </ul>
     </div>
 </nav>

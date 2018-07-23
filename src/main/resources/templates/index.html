@@ -24,7 +24,9 @@
     <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="home">Etusivu</a></li>
         <li><a href="hours">Kirjaa tunteja</a></li>
+        <div sec:authorize="!isAuthenticated()">
         <li><a href="registration">Rekisteröidy </a></li>
+        </div>
         <li><a href="#">Käyttäjä: [[${#httpServletRequest.remoteUser}]]</a> </li>
         <li><form th:action="@{/logout}" method="POST"><input type="submit" class="btn btn-primary" style="margin-top: 7px; margin-right: 5px;" value="Kirjaudu ulos" /></form> </li>
     </ul>
