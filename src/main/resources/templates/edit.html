@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8"/>
@@ -20,12 +20,14 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Tuntikirjaus v.0.1</a>
+            <a class="navbar-brand" href="/home">Tuntikirjaus v.0.1</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="home">Etusivu</a></li>
+            <li><a href="home">Etusivu</a></li>
             <li><a href="hours">Kirjaa tunteja</a></li>
+            <div sec:authorize="!isAuthenticated()">
             <li><a href="registration">Rekisteröidy</a></li>
+            </div>
         </ul>
     </div>
 </nav>
@@ -37,7 +39,7 @@
             <input type="hidden" class="form-control" th:id="kayttajaid" th:name="kayttajaid" th:value="${#authentication.name}" />
             <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}" /></p>
             <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}" /></p>
-            <p>Tehtäväkuvaus: <input type="text" class="form-control" th:field="*{tehtavakuvaus}" /></p>
+            <p>Tehtäväkuvaus: <textarea class="form-control" rows="5" th:field="*{tehtavakuvaus}" /></textarea></p>
             <p>Laskutettava:<br /> <input type="checkbox" th:field="*{laskutettava}" /></p>
             <p><input type="submit" value="Submit" class="btn btn-info" /> <input type="reset" value="Reset" class="btn btn-danger" /></p>
         </form>

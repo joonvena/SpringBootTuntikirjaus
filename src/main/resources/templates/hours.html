@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Tuntikirjaus</title>
@@ -11,6 +12,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -18,37 +20,44 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Tuntikirjaus v.0.1</a>
+            <a class="navbar-brand" href="/home">Tuntikirjaus v.0.1</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="home">Etusivu</a></li>
+            <li><a href="home">Etusivu</a></li>
             <li><a href="hours">Kirjaa tunteja</a></li>
             <div sec:authorize="!isAuthenticated()">
-            <li><a href="registration">Rekisteröidy</a></li>
+                <li><a href="registration">Rekisteröidy</a></li>
             </div>
         </ul>
     </div>
 </nav>
 <div class="container">
 
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
 
-    <div class="form-group" style="margin-top: 100px;">
-        <form action="#" th:action="@{/hours}" th:object="${hours}" method="post">
+            <h3>Kirjaa tunteja</h3><br />
+            <div class="form-group">
+                <form action="#" th:action="@{/hours}" th:object="${hours}" method="post">
 
-            <input type="hidden" class="form-control" th:id="kayttajaid" th:name="kayttajaid"
-                   th:value="${#authentication.name}"/>
+                    <input type="hidden" class="form-control" th:id="kayttajaid" th:name="kayttajaid"
+                           th:value="${#authentication.name}"/>
 
-            <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}"/></p>
+                    <p>Päivämäärä: <input type="date" class="form-control" th:field="*{paivamaara}"/></p>
 
-            <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}"/></p>
+                    <p>Minuutit: <input type="text" class="form-control" th:field="*{minuutit}"/></p>
 
-            <p>Tehtäväkuvaus: <input type="text" class="form-control" th:field="*{tehtavakuvaus}"/></p>
-            <p>Laskutettava:<br/> <input type="checkbox" th:field="*{laskutettava}"/></p>
-            <p><input type="submit" value="Lähetä" class="btn btn-info"/> <input type="reset" value="Tyhjennä"
-                                                                                 class="btn btn-danger"/></p>
-            <input type="hidden" th:field="*{id}"/>
-        </form>
+                    <p>Tehtäväkuvaus: <textarea rows="5" class="form-control" th:field="*{tehtavakuvaus}"/></p>
+                    <p>Laskutettava:<br/> <input type="checkbox" th:field="*{laskutettava}"/></p>
+                    <p><input type="submit" value="Lähetä" class="btn btn-info"/> <input type="reset" value="Tyhjennä" class="btn btn-danger"/></p>
+                    <input type="hidden" th:field="*{id}"/>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
     </div>
+</div>
 
 </div>
 </body>
