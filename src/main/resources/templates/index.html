@@ -64,7 +64,8 @@
         </thead>
         <tbody id="myTable">
 
-        <tr th:each="p : ${showhours}" th:if="${#authorization.expression('hasAuthority(''USER'')') and p.kayttajaid == #authentication.name or #authorization.expression('hasAuthority(''ADMIN'')')}">
+        <tr th:each="p : ${showhours}"
+            th:if="${#authorization.expression('hasAuthority(''USER'')') and p.kayttajaid == #authentication.name or #authorization.expression('hasAuthority(''ADMIN'')')}">
 
             <td th:text="${p.id}"></td>
             <td th:text="${p.kayttajaid}"></td>
@@ -122,18 +123,18 @@
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#sort').DataTable({
             "searching": false,
             "info": false,
             "paging": false,
             "columnDefs": [{
-                "targets": [1,2,4,6,7],
+                "targets": [1, 2, 4, 6, 7],
                 "orderable": false,
             }]
         });
 
-    } );
+    });
 
 </script>
 

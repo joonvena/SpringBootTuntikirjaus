@@ -55,8 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/home", "/hours").access("hasAnyAuthority('ADMIN', 'USER')").anyRequest().permitAll()
-                .and().formLogin().loginPage("/login").usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/home").permitAll().and().logout().permitAll();
-        http.exceptionHandling().accessDeniedPage("/403");
+                .and().formLogin().loginPage("/login").failureUrl("/error").usernameParameter("email").passwordParameter("password").defaultSuccessUrl("/home").permitAll().and().logout().permitAll();
+        http.exceptionHandling().accessDeniedPage("/login");
     }
 
 

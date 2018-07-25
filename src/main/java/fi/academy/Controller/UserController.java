@@ -54,8 +54,8 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model) {
         return "login";
-
     }
+
 
     @GetMapping(value = "/edit/{id}")
     public String editHours(@PathVariable("id") Integer id, Model model) {
