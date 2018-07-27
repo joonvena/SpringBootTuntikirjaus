@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tuntikirjaus</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/home">Tuntikirjaus v.0.1</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="home">Etusivu</a></li>
+                <li><a href="registration">Rekisteröidy </a></li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+
+            <h4>Käyttäjätunnus tai salasana väärin!</h4>
+            <a href="/home">Yritä uudestaan</a> tai <a href="/registration">Rekisteröidy</a>
+
+        </div>
+        <div class="col-sm-3"></div>
+
+    </div>
+
+
+
+</div>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $('#sort').DataTable({
+            "searching": false,
+            "info": false,
+            "paging": false,
+            "columnDefs": [{
+                "targets": [1, 2, 4, 6, 7],
+                "orderable": false,
+            }]
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
