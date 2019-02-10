@@ -64,12 +64,6 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/feedback")
-    public String login(Model model) {
-        return "feedback";
-    }
-
-
     @GetMapping(value = "/edit/{id}")
     public String editHours(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("hours", hoursRepository.findById(id));
